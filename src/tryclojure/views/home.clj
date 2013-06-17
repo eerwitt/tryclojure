@@ -24,7 +24,6 @@
    "TryClojure is written in Clojure and JavaScript with "
    (link-to "http://webnoir.org" "Noir") ", "
    (link-to "https://github.com/flatland/clojail" "clojail") ", and Chris Done's "
-   (link-to "https://github.com/chrisdone/jquery-console" "jquery-console") ". "
    " The design is by " (link-to "http://apgwoz.com" "Andrew Gwozdziewycz") "."
   ])
 
@@ -41,16 +40,18 @@
   (html5
    [:head
     (include-css "/resources/public/css/tryclojure.css"
-								 "/resources/public/css/gh-fork-ribbon.css")
-    (include-js "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
-                "/resources/public/javascript/jquery-console/jquery.console.js"
-                "/resources/public/javascript/tryclojure.js")
+								 "/resources/public/css/gh-fork-ribbon.css"
+                 "/resources/public/codemirror/codemirror.css")
+    (include-js "/resources/public/codemirror/codemirror.js"
+                "/resources/public/codemirror/matchbrackets.js"
+                "/resources/public/codemirror/closebrackets.js"
+                "/resources/public/codemirror/clojure.js")
     [:title "Try Clojure"]]
    [:body
     [:div#wrapper
 			[:div.github-fork-ribbon-wrapper.right
 	     [:div.github-fork-ribbon
-	       (link-to "https://github.com/Raynes/tryclojure" "Fork me on GitHub")
+	       (link-to "https://github.com/eerwitt/tryclojure" "Fork me on GitHub")
 				]
 			]
      [:div#content
@@ -66,16 +67,12 @@
        [:div#changer (home-html)]]
       [:div.footer
        [:p.bottom "©2011-2012 Anthony Grimes and numerous contributors."]]
-      (javascript-tag
-       "var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-27340918-1']);
-        _gaq.push(['_trackPageview']);
+     ] 
+    ]
+    [:textarea#code ]
 
-        (function() {
-          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();")]]]))
+    (javascript-tag "CodeMirror.fromTextArea(document.getElementById(\"code\"), {\"autofocus\": true, \"autoMatchParens\": true, \"matchBrackets\": true, \"autoCloseBrackets\": true});")
+]))
 
 (defpage "/" []
   (root-html))
