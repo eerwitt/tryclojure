@@ -8,39 +8,48 @@ function eval_clojure(code, callback) {
     });
 }
 
-var dirty, lastCode;
-
-function evaluateCode(editor) {
+function evaluateCode(editorStatus, editor, resultDiv) {
   var currentCode = editor.getValue();
-  if(dirty && lastCode != currentCode) {
+  if(editorStatus.dirty && editorStatus.lastCode != currentCode) {
     eval_clojure(currentCode, function(originalCode, response) {
       if(!response.error) {
-        $("#result").removeClass("text-error");
-        $("#result").text("=> " + response.result);
+        resultDiv.removeClass("text-error");
+        resultDiv.text("=> " + response.result);
       } else {
-        $("#result").addClass("text-error");
-        $("#result").text(response.message);
+        resultDiv.addClass("text-error");
+        resultDiv.text(response.message);
       }
     });
 
-    lastCode = currentCode;
-    dirty = false;
+    editorStatus.lastCode = currentCode;
+    editorStatus.dirty = false;
   }
 }
 
-$(document).ready(function() {
-  var editor = CodeMirror.fromTextArea($("#code")[0], {
+function setupCodeBlock(codeTextArea, resultDiv) {
+  var editor = CodeMirror.fromTextArea(codeTextArea, {
     "autofocus": true,
     "autoMatchParens": true,
     "autoCloseBrackets": true,
     "matchBrackets": true});
 
-  dirty = true;
+  var editorStatus = {
+    "dirty": true,
+    "lastCode": null
+  };
 
   editor.on('change', function() {
-    dirty = true;
+    editorStatus.dirty = true;
   });
 
-  setInterval(function() {evaluateCode(editor); }, 1000);
-  evaluateCode(editor);
+  var codeEvaluator = function() {
+    evaluateCode(editorStatus, editor, resultDiv);
+  };
+
+  setInterval(codeEvaluator, 500);
+  codeEvaluator();
+}
+
+$(document).ready(function() {
+  setupCodeBlock($("#code")[0], $("#result"));
 });
