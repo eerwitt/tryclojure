@@ -62,7 +62,11 @@
         [:span.logo-clojure "Clo" [:em "j"] "ure"]]]]
      [:div.row-fluid
       [:div.container.span12
-        [:div.code_container [:textarea#code]]
+        [:div.code_container 
+          [:textarea#code 
+"(let
+  [name \"Nobody\"]
+  (format \"Hello world! By %s.\" name))"]]
       ]]
      [:div.row-fluid
       [:div.result_container.container.span12

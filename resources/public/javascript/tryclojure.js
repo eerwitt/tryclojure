@@ -36,11 +36,12 @@ $(document).ready(function() {
     "autoCloseBrackets": true,
     "matchBrackets": true});
 
-  dirty = false;
+  dirty = true;
 
   editor.on('change', function() {
     dirty = true;
   });
 
   setInterval(evaluateCode, 1000);
+  evaluateCode();
 });
