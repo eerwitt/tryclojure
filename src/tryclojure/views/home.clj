@@ -72,7 +72,16 @@
       ]]
      [:div.row-fluid
       [:div.result_container.container.span12
-        [:pre#result "=> nil"]]]
+        [:pre#result]]]
+     [:div.row-fluid
+      [:div.span4
+        [:div.code_container
+          [:textarea#sidecode
+"(let
+  [x 123]
+  (+ x 24))"]]]
+      [:div.span4.result_container
+        [:pre#sideresult]]]
      [:div.row-fluid
       [:div.span1]
       [:div.span5 (about-html)]

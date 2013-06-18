@@ -8,25 +8,17 @@ function eval_clojure(code, callback) {
     });
 }
 
-function evaluateCode(editorStatus, editor, resultDiv) {
+function evaluateCode(editorStatus, editor, callback) {
   var currentCode = editor.getValue();
   if(editorStatus.dirty && editorStatus.lastCode != currentCode) {
-    eval_clojure(currentCode, function(originalCode, response) {
-      if(!response.error) {
-        resultDiv.removeClass("text-error");
-        resultDiv.text("=> " + response.result);
-      } else {
-        resultDiv.addClass("text-error");
-        resultDiv.text(response.message);
-      }
-    });
+    eval_clojure(currentCode, callback);
 
     editorStatus.lastCode = currentCode;
     editorStatus.dirty = false;
   }
 }
 
-function setupCodeBlock(codeTextArea, resultDiv) {
+function setupCodeBlock(codeTextArea, callback) {
   var editor = CodeMirror.fromTextArea(codeTextArea, {
     "autofocus": true,
     "autoMatchParens": true,
@@ -43,7 +35,7 @@ function setupCodeBlock(codeTextArea, resultDiv) {
   });
 
   var codeEvaluator = function() {
-    evaluateCode(editorStatus, editor, resultDiv);
+    evaluateCode(editorStatus, editor, callback);
   };
 
   setInterval(codeEvaluator, 500);
@@ -51,5 +43,27 @@ function setupCodeBlock(codeTextArea, resultDiv) {
 }
 
 $(document).ready(function() {
-  setupCodeBlock($("#code")[0], $("#result"));
+  setupCodeBlock($("#code")[0], function (originalCode, response) {
+    var resultDiv = $("#result");
+    if(!response.error) {
+      resultDiv.removeClass("text-error");
+      resultDiv.text("=> " + response.result);
+    } else {
+      resultDiv.addClass("text-error");
+      resultDiv.text(response.message);
+    }
+  });
+
+  setupCodeBlock($("#sidecode")[0], function (originalCode, response) {
+    var resultDiv = $("#sideresult");
+    if(!response.error) {
+      resultDiv.removeClass("text-error");
+      resultDiv.addClass("text-success");
+      resultDiv.text("=> " + response.result);
+    } else {
+      resultDiv.removeClass("text-success");
+      resultDiv.addClass("text-error");
+      resultDiv.text(response.message);
+    }
+  });
 });
