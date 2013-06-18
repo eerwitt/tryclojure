@@ -1,40 +1,40 @@
 body {
- text-align: center;
+  text-align: center;
 }
 
 #wrapper {
- text-align: left;
- border-radius: 5px;
- border: 5px solid #eee;
+  text-align: left;
+  border-radius: 5px;
+  border: 5px solid #eee;
 }
 
 #header {
- margin-top: 24px;
- margin: 10px;
+  margin-top: 24px;
+  margin: 10px;
 }
 
 #header h1 {
- line-height: 72px;
- background: url(/resources/public/clojure-logo.png) no-repeat;
- padding-left: 75px;
- font-family: Arial, sans-serif;
- font-weight: normal;
- font-size: 48px;
+  line-height: 72px;
+  background: url(/resources/public/clojure-logo.png) no-repeat;
+  padding-left: 75px;
+  font-family: Arial, sans-serif;
+  font-weight: normal;
+  font-size: 48px;
 }
 
 #header h1 span.logo-try {
- color: #63b132;
- display:inline;
+  color: #63b132;
+  display:inline;
 }
 
 #header h1 span.logo-clojure {
- color: #5881d8;
- display:inline
+  color: #5881d8;
+  display:inline
 }
 
 .code_container {
- margin: 10px;
- border: 2px solid #aaa;
+  margin: 10px;
+  border: 2px solid #aaa;
 }
 
 #result {
