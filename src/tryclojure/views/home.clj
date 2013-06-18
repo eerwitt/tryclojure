@@ -32,7 +32,35 @@
    " The design is by " (link-to "http://apgwoz.com" "Andrew Gwozdziewycz") "."
   ])
 
-(defn root-html []
+(defpartial main-html []
+  [:div
+    [:div.row-fluid
+      [:div.container.span12
+        [:div.code_container 
+          [:textarea#code 
+"(let
+  [name \"Nobody\"]
+  (format \"Hello world! By %s.\" name))"]]
+      ]]
+    [:div.row-fluid
+      [:div.result_container.container.span12
+        [:pre#result]]]
+])
+
+(defpartial tutorial-html []
+  [:div
+    [:div.row-fluid
+      [:div.span6
+        [:div.code_container
+          [:textarea#code
+"(let
+  [x 123]
+  (+ x 24))"]]]
+      [:div.span6.result_container
+        [:pre#result]]]
+])
+
+(defn root-html [content-html]
   (html5
    [:head
     [:meta {:charset "UTF-8"}]
@@ -62,26 +90,7 @@
        [:h1
         [:span.logo-try "Try"] " "
         [:span.logo-clojure "Clo" [:em "j"] "ure"]]]]
-     [:div.row-fluid
-      [:div.container.span12
-        [:div.code_container 
-          [:textarea#code 
-"(let
-  [name \"Nobody\"]
-  (format \"Hello world! By %s.\" name))"]]
-      ]]
-     [:div.row-fluid
-      [:div.result_container.container.span12
-        [:pre#result]]]
-     [:div.row-fluid
-      [:div.span4
-        [:div.code_container
-          [:textarea#sidecode
-"(let
-  [x 123]
-  (+ x 24))"]]]
-      [:div.span4.result_container
-        [:pre#sideresult]]]
+     (content-html)
      [:div.row-fluid
       [:div.span1]
       [:div.span5 (about-html)]
@@ -94,4 +103,7 @@
 ]))
 
 (defpage "/" []
-  (root-html))
+  (root-html main-html))
+
+(defpage "/tutorial" []
+  (root-html tutorial-html))

@@ -1,11 +1,11 @@
 function eval_clojure(code, callback) {
-    $.ajax({
-        url: "eval.json",
-        data: { expr : code },
-        success: function(data) {
-          callback(code, data);
-        }
-    });
+  $.ajax({
+      url: "eval.json",
+      data: { expr : code },
+      success: function(data) {
+        callback(code, data);
+      }
+  });
 }
 
 function evaluateCode(editorStatus, editor, callback) {
@@ -45,17 +45,6 @@ function setupCodeBlock(codeTextArea, callback) {
 $(document).ready(function() {
   setupCodeBlock($("#code")[0], function (originalCode, response) {
     var resultDiv = $("#result");
-    if(!response.error) {
-      resultDiv.removeClass("text-error");
-      resultDiv.text("=> " + response.result);
-    } else {
-      resultDiv.addClass("text-error");
-      resultDiv.text(response.message);
-    }
-  });
-
-  setupCodeBlock($("#sidecode")[0], function (originalCode, response) {
-    var resultDiv = $("#sideresult");
     if(!response.error) {
       resultDiv.removeClass("text-error");
       resultDiv.addClass("text-success");
