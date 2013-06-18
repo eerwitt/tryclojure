@@ -158,37 +158,38 @@ function onHandle(line, report) {
     return [{msg: data.result, className: "jquery-console-message-value"}];
 }
 
-/**
- * This should be called anytime the changer div is updated so it can rebind event listeners.
- * Currently this is just to make the code elements clickable.
- */
-function changerUpdated() {
-    $("#changer code.expr").each(function() {
-        $(this).css("cursor", "pointer");
-        $(this).attr("title", "Click to insert '" + $(this).text() + "' into the console.");
-        $(this).click(function(e) {
-            controller.promptText($(this).text());
-            controller.inner.click();
-        });
-    });
+var editor, dirty, lastCode;
+
+function evaluateCode() {
+  var currentCode = editor.getValue();
+  if(dirty && lastCode != currentCode) {
+    var data = eval_clojure(currentCode);
+
+    if(!data.error) {
+      $("#result").removeClass("text-error");
+      $("#result").text("=> " + data.result);
+    } else {
+      $("#result").addClass("text-error");
+      $("#result").text(data.message);
+    }
+
+    lastCode = currentCode;
+    dirty = false;
+  }
 }
 
-var controller;
-
 $(document).ready(function() {
-    controller = $("#console").console({
-        welcomeMessage:'Give me some Clojure:',
-        promptLabel: '> ',
-        commandValidate: onValidate,
-        commandHandle: onHandle,
-        autofocus:true,
-        animateScroll:true,
-        promptHistory:true
-    });
+  editor = CodeMirror.fromTextArea($("#code")[0], {
+    "autofocus": true,
+    "autoMatchParens": true,
+    "autoCloseBrackets": true,
+    "matchBrackets": true});
 
-    $("#about").click(setupLink("about"));
-    $("#links").click(setupLink("links"));
-    $("#home").click(setupLink("home"));
+  dirty = false;
 
-    changerUpdated();
+  editor.on('change', function() {
+    dirty = true;
+  });
+
+  setInterval(evaluateCode, 1000);
 });
