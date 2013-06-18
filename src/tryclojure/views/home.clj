@@ -35,6 +35,8 @@
 (defn root-html []
   (html5
    [:head
+    [:meta {:charset "UTF-8"}]
+    [:meta {:name "viewport" :content "width=device-width, initial-scale=1, maximum-scale=1"}]
     (include-css "/resources/public/bootstrap/css/bootstrap.min.css"
                 "/resources/public/bootstrap/css/bootstrap-responsive.min.css"
                 "/resources/public/css/tryclojure.css"
