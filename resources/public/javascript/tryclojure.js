@@ -1,28 +1,27 @@
-function eval_clojure(code) {
-    var data;
+function eval_clojure(code, callback) {
     $.ajax({
         url: "eval.json",
         data: { expr : code },
-        async: false,
-        success: function(res) { data = res; }
+        success: function(data) {
+          callback(code, data);
+        }
     });
-    return data;
 }
 
-var editor, dirty, lastCode;
+var dirty, lastCode;
 
-function evaluateCode() {
+function evaluateCode(editor) {
   var currentCode = editor.getValue();
   if(dirty && lastCode != currentCode) {
-    var data = eval_clojure(currentCode);
-
-    if(!data.error) {
-      $("#result").removeClass("text-error");
-      $("#result").text("=> " + data.result);
-    } else {
-      $("#result").addClass("text-error");
-      $("#result").text(data.message);
-    }
+    eval_clojure(currentCode, function(originalCode, response) {
+      if(!response.error) {
+        $("#result").removeClass("text-error");
+        $("#result").text("=> " + response.result);
+      } else {
+        $("#result").addClass("text-error");
+        $("#result").text(response.message);
+      }
+    });
 
     lastCode = currentCode;
     dirty = false;
@@ -30,7 +29,7 @@ function evaluateCode() {
 }
 
 $(document).ready(function() {
-  editor = CodeMirror.fromTextArea($("#code")[0], {
+  var editor = CodeMirror.fromTextArea($("#code")[0], {
     "autofocus": true,
     "autoMatchParens": true,
     "autoCloseBrackets": true,
@@ -42,6 +41,6 @@ $(document).ready(function() {
     dirty = true;
   });
 
-  setInterval(evaluateCode, 1000);
-  evaluateCode();
+  setInterval(function() {evaluateCode(editor); }, 1000);
+  evaluateCode(editor);
 });
