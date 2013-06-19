@@ -43,16 +43,19 @@ function setupCodeBlock(codeTextArea, callback) {
 }
 
 $(document).ready(function() {
-  setupCodeBlock($("#code")[0], function (originalCode, response) {
-    var resultDiv = $("#result");
-    if(!response.error) {
-      resultDiv.removeClass("text-error");
-      resultDiv.addClass("text-success");
-      resultDiv.text("=> " + response.result);
-    } else {
-      resultDiv.removeClass("text-success");
-      resultDiv.addClass("text-error");
-      resultDiv.text(response.message);
-    }
+  $(".code").each(function(i, element) {
+    var resultDiv = $(element.getAttribute("data-result"));
+
+    setupCodeBlock(element, function (originalCode, response) {
+      if(!response.error) {
+        resultDiv.removeClass("text-error");
+        resultDiv.addClass("text-success");
+        resultDiv.text("=> " + response.result);
+      } else {
+        resultDiv.removeClass("text-success");
+        resultDiv.addClass("text-error");
+        resultDiv.text(response.message);
+      }
+    });
   });
 });

@@ -37,7 +37,7 @@
     [:div.row-fluid
       [:div.container.span12
         [:div.code_container 
-          [:textarea#code 
+          [:textarea.code {:data-result "#result"}
 "(let
   [name \"Nobody\"]
   (format \"Hello world! By %s.\" name))"]]
@@ -52,13 +52,24 @@
     [:div.row-fluid
       [:div.span6
         [:div.code_container
-          [:textarea#code
+          [:textarea.code {:data-result "#result"}
 "(let
   [x 123]
   (+ x 24))"]]]
       [:div.span6.result_container
         [:pre#result]]]
 ])
+
+(defpartial footer []
+  [:div.row-fluid
+    [:div.span1]
+    [:div.span5 (about-html)]
+    [:div.span5 (links-html)]]
+    [:div.span1]
+
+  [:div.footer.span12.text-center
+    [:p "&copy; 2011-2012 Anthony Grimes and numerous contributors."]]
+)
 
 (defn root-html [content-html]
   (html5
@@ -91,14 +102,8 @@
         [:span.logo-try "Try"] " "
         [:span.logo-clojure "Clo" [:em "j"] "ure"]]]]
      (content-html)
-     [:div.row-fluid
-      [:div.span1]
-      [:div.span5 (about-html)]
-      [:div.span5 (links-html)]]
-      [:div.span1]
 
-     [:div.footer.span12.text-center
-      [:p "&copy; 2011-2012 Anthony Grimes and numerous contributors."]]
+     (footer)
     ]
 ]))
 
