@@ -44,7 +44,10 @@
   (format \"Hello world! By %s.\" name))"]]
       ]
       [:div.result_container.container.span6
-        [:pre#result]]]
+        [:pre 
+          "=> "
+          [:span#result]
+        ]]]
 ])
 
 (defpartial tutorial-html []

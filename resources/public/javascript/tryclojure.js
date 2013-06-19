@@ -51,7 +51,7 @@ $(document).ready(function() {
       if(!response.error) {
         resultDiv.removeClass("text-error");
         resultDiv.addClass("text-success");
-        resultDiv.text("=> " + response.result);
+        resultDiv.text(response.result);
       } else {
         resultDiv.removeClass("text-success");
         resultDiv.addClass("text-error");
