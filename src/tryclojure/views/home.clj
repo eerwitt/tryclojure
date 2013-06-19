@@ -35,15 +35,15 @@
 (defpartial main-html []
   [:div
     [:div.row-fluid
-      [:div.container.span12
-        [:div.code_container 
+      [:div.container.span6
+        [:div.code_container.main_block
           [:textarea.code {:data-result "#result"}
-"(let
-  [name \"Nobody\"]
+"; This is Clojure code, edit and see what happens.
+(let
+  [name \"Anonymous\"]
   (format \"Hello world! By %s.\" name))"]]
-      ]]
-    [:div.row-fluid
-      [:div.result_container.container.span12
+      ]
+      [:div.result_container.container.span6
         [:pre#result]]]
 ])
 

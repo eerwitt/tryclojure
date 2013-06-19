@@ -4,6 +4,9 @@
   /* Set height, width, borders, and global font properties here */
   font-family: "Menlo", "Bitstream Vera Sans Mono", monospace;
   font-size: 13px;
+
+  border: solid 1px #ccc;
+  border-radius: 4px;
 }
 .CodeMirror-scroll {
   /* Set scrolling behaviour here */

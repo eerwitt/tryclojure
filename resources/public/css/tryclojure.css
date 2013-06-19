@@ -30,6 +30,11 @@ body {
   display:inline
 }
 
-.code_container {
-  margin: 10px;
+.main_block > .CodeMirror {
+  height: 300px;
+}
+
+.CodeMirror-gutter {
+  height: 100%;
+  display: inline-block;
 }
