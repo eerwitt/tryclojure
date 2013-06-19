@@ -23,6 +23,7 @@ function setupCodeBlock(codeTextArea, callback) {
     "autofocus": true,
     "autoMatchParens": true,
     "autoCloseBrackets": true,
+    "lineNumbers": true,
     "matchBrackets": true});
 
   var editorStatus = {
