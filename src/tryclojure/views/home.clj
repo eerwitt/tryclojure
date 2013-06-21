@@ -55,7 +55,7 @@
     [:div.row-fluid
       [:div.span6
         [:div.code_container
-          [:textarea.code {:data-result "#result"}
+          [:textarea.code {:data-result "#result" :data-expected "3"}
 "(let
   [x 123]
   (+ x 24))"]]]
