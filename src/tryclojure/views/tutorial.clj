@@ -4,35 +4,35 @@
             [hiccup.page :refer [include-css include-js html5]]
             [tryclojure.views.template :refer [root-html]]))
 
-(defpartial tutorial-html [& {:keys [interactive-tutorial-html] :or {interactive-tutorial-html nil}}]
+(defpartial tutorial-nav []
+  [:table.table.table-striped.table-bordered
+    [:thead
+      [:th "Tutorial"]
+      [:th "Description"]]
+    [:tbody
+      [:tr
+        [:td "Tutorial 1"]
+        [:td "Learn to add two numbers together... HARDCORE!"]]
+      [:tr
+        [:td "Tutorial 2"]
+        [:td "Work with a local variable."]]]])
+
+(defpartial tutorial-main []
   [:div.row-fluid
     [:div.span12.container
       [:h2 "Tutorials"]
       [:p "These tutorials are designed to help you get started using Clojure, they are primarily based on the clojure-kloans project as a good starting point"]]]
   [:div.row-fluid
     [:div.span12.container
-      [:table.table.table-striped.table-bordered
-        [:thead
-          [:th "Tutorial"]
-          [:th "Description"]]
-        [:tbody
-          [:tr
-            [:td "Tutorial 1"]
-            [:td "Learn to add two numbers together... HARDCORE!"]]
-          [:tr
-            [:td "Tutorial 2"]
-            [:td "Work with a local variable."]]]]]]
+      (tutorial-nav)]])
 
-  (if interactive-tutorial-html (interactive-tutorial-html))
+(defpartial tutorial-html [& {:keys [interactive-tutorial-html] :or {interactive-tutorial-html nil}}]
+  (interactive-tutorial-html)
+
   [:div.row-fluid
-    [:div.span6
-      [:div.code_container
-        [:textarea.code {:data-result "#result" :data-expected "3"}
-"(let
-  [x 123]
-  (+ x 24))"]]]
-    [:div.span6.result_container
-      [:pre#result]]]
+    [:div.span12.container
+      (tutorial-nav)]]
+
 )
 
 (defpartial tutorial1-html []
@@ -47,10 +47,18 @@
       [:div.code_container
         [:textarea.code {:data-result "#tutorial1-example1" :data-expected "3"} "(+ 1 2)"]]]
     [:div.span4.result_container
-      [:pre#tutorial1-example1]]])
+      [:pre#tutorial1-example1]]]
+  [:div.row-fluid
+    [:div.span4
+      [:p "Most operators work in a similar fashion, this example is broken. Try to see if you can fix it."]]
+    [:div.span4
+      [:div.code_container
+        [:textarea.code {:data-result "#tutorial1-example2" :data-expected "2"} "(10 / 5)"]]]
+    [:div.span4.result_container
+      [:pre#tutorial1-example2]]])
 
 (defpage "/tutorial" []
-  (root-html tutorial-html))
+  (root-html tutorial-main))
 
 (defpage "/tutorial1" []
   (root-html #(tutorial-html :interactive-tutorial-html tutorial1-html)))
