@@ -5,22 +5,32 @@
             [tryclojure.views.template :refer [root-html]]))
 
 (defpartial main-html []
-  [:div
-    [:div.row-fluid
-      [:div.container.span6
-        [:div.code_container.main_block
-          [:textarea.code {:data-result "#result"}
+  [:div.row-fluid
+    [:div.container.span6
+      [:div.code_container.main_block
+        [:textarea.code {:data-result "#result"}
 "; This is Clojure code, edit and see what happens.
 (let
-  [name \"Anonymous\"]
-  (format \"Hello world! By %s.\" name))"]]
-      ]
-      [:div.result_container.container.span6
-        [:pre 
-          "=> "
-          [:span#result]
-        ]]]
-])
+[name \"Anonymous\"]
+(format \"Hello world! By %s.\" name))"]]
+    ]
+    [:div.result_container.container.span6
+      [:pre 
+        "=> "
+        [:span#result]
+      ]]]
+  [:div.row-fluid
+    [:div.span6
+      [:div.btn-group.pull-right
+        [:a.btn.btn-success {:href "#"}
+          [:i.icon-play.icon-white] " Run"]
+        [:a.btn.btn-success.dropdown-toggle
+          {:data-toggle "dropdown" :href "#"}
+          [:span.caret]]
+        [:ul.dropdown-menu
+          [:li [:a {:href "#"} [:i.icon-repeat] " Autorun"]]]
+        ]
+    ]])
 
 (defpage "/" []
   (root-html main-html))
