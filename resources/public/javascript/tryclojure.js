@@ -18,6 +18,16 @@ function evaluateCode(editorStatus, editor, callback) {
   }
 }
 
+function runCode(editorStatus, editor, callback) {
+  var codeEvaluator = function() {
+    evaluateCode(editorStatus, editor, callback);
+  };
+
+  codeEvaluator();
+
+  return codeEvaluator;
+}
+
 function setupCodeBlock(codeTextArea, callback) {
   var editor = CodeMirror.fromTextArea(codeTextArea, {
     "autofocus": true,
@@ -35,12 +45,7 @@ function setupCodeBlock(codeTextArea, callback) {
     editorStatus.dirty = true;
   });
 
-  var codeEvaluator = function() {
-    evaluateCode(editorStatus, editor, callback);
-  };
-
-  setInterval(codeEvaluator, 500);
-  codeEvaluator();
+  return runCode(editorStatus, editor, callback);
 }
 
 $(document).ready(function() {
@@ -48,7 +53,12 @@ $(document).ready(function() {
     var resultDiv = $(element.getAttribute("data-result"));
     var expectedResult = element.getAttribute("data-expected");
 
-    setupCodeBlock(element, function (originalCode, response) {
+    var codeBlockSelector = "a[data-code-block='#" + element.id + "']";
+
+    var runButton = $(codeBlockSelector);
+    var autoRunButton = $(codeBlockSelector + "a[data-autorun='true']");
+
+    var responseCallback = function(originalCode, response) {
       if(!response.error && !expectedResult) {
         resultDiv.removeClass("text-error");
         resultDiv.addClass("text-success");
@@ -62,6 +72,23 @@ $(document).ready(function() {
         resultDiv.addClass("text-error");
         resultDiv.text(response.message || response.result);
       }
-    });
+    };
+
+    var codeEvaluator = setupCodeBlock(element, responseCallback);
+
+    if(runButton) {
+      runButton.on('click', function(evt) {
+        evt.preventDefault();
+        codeEvaluator();
+      });
+    }
+
+    if(autoRunButton) {
+      autoRunButton.on('click', function(evt) {
+        $(this).find("i").toggleClass("icon-spin").toggleClass("running");
+        setInterval(codeEvaluator, 2000);
+        codeEvaluator();
+      });
+    }
   });
 });

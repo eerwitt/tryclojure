@@ -8,7 +8,7 @@
   [:div.row-fluid
     [:div.container.span6
       [:div.code_container.main_block
-        [:textarea.code {:data-result "#result"}
+        [:textarea#block.code {:data-result "#result"}
 "; This is Clojure code, edit and see what happens.
 (let
 [name \"Anonymous\"]
@@ -22,13 +22,13 @@
   [:div.row-fluid
     [:div.span6
       [:div.btn-group.pull-right
-        [:a.btn.btn-success {:href "#"}
+        [:a.btn.btn-success {:href "#" :data-code-block "#block"}
           [:i.icon-play.icon-white] " Run"]
         [:a.btn.btn-success.dropdown-toggle
           {:data-toggle "dropdown" :href "#"}
           [:span.caret]]
         [:ul.dropdown-menu
-          [:li [:a {:href "#"} [:i.icon-repeat] " Autorun"]]]
+          [:li [:a {:href "#" :data-code-block "#block" :data-autorun "true"} [:i.icon-refresh] " Autorun"]]]
         ]
     ]])
 

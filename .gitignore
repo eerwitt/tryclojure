@@ -6,3 +6,4 @@ classes
 .lein-deps-sum
 target
 .lein-failures
+.DS_Store
