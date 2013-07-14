@@ -48,6 +48,10 @@ body {
   z-index: 10;
 }
 
+.tutorial-nav {
+  padding: 8px 0px;
+}
+
 .running {
   /*color: #51a351 !important;*/
 }
