@@ -5,34 +5,23 @@
             [tryclojure.views.template :refer [root-html]]))
 
 (defpartial tutorial-nav []
-  [:table.table.table-striped.table-bordered
-    [:thead
-      [:th "Tutorial"]
-      [:th "Description"]]
-    [:tbody
-      [:tr
-        [:td "Tutorial 1"]
-        [:td "Learn to add two numbers together... HARDCORE!"]]
-      [:tr
-        [:td "Tutorial 2"]
-        [:td "Work with a local variable."]]]])
+  [:div.well.span3.tutorial-nav
+    [:ul.nav.nav-list
+      [:li.nav-header "Tutorials"]
+      [:li [:a {:href "#tutorial_1" :title "Tutorial 1 - First Steps"} "Tutorial 1 - First Steps"]]
+      [:li [:a {:href "#tutorial_2" :title "Tutorial 2 - Lists (LISPs)"} "Tutorial 2 - Lists (LISPs)"]]
+    ]])
 
 (defpartial tutorial-main []
   [:div.row-fluid
-    [:div.span12.container
+    (tutorial-nav)
+    [:div.span8
       [:h2 "Tutorials"]
-      [:p "These tutorials are designed to help you get started using Clojure, they are primarily based on the clojure-kloans project as a good starting point"]]]
-  [:div.row-fluid
-    [:div.span12.container
-      (tutorial-nav)]])
+      [:p "These tutorials are designed to help you get started using Clojure, they are primarily based on the clojure-kloans project as a good starting point"]]])
 
 (defpartial tutorial-html [& {:keys [interactive-tutorial-html] :or {interactive-tutorial-html nil}}]
+  [:div.row-fluid (tutorial-nav)]
   (interactive-tutorial-html)
-
-  [:div.row-fluid
-    [:div.span12.container
-      (tutorial-nav)]]
-
 )
 
 (defpartial tutorial1-html []
