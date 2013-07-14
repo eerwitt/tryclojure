@@ -10,9 +10,8 @@
       [:div.code_container.main_block
         [:textarea#block.code {:data-result "#result"}
 "; This is Clojure code, edit and see what happens.
-(let
-[name \"Anonymous\"]
-(format \"Hello world! By %s.\" name))"]]
+(let [name \"Anonymous\"]
+  (format \"Hello world! By %s.\" name))"]]
     ]
     [:div.result_container.container.span6
       [:pre 
@@ -34,4 +33,3 @@
 
 (defpage "/" []
   (root-html main-html))
-
