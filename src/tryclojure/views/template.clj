@@ -43,7 +43,7 @@
     [:p "&copy; 2011-2012 Anthony Grimes and numerous contributors."]]
 )
 
-(defn root-html [content-html]
+(defn root-html [content-html page-js]
   (html5
    [:head
     [:meta {:charset "UTF-8"}]
@@ -60,7 +60,8 @@
                 "/resources/public/codemirror/codemirror.js"
                 "/resources/public/codemirror/matchbrackets.js"
                 "/resources/public/codemirror/closebrackets.js"
-                "/resources/public/codemirror/clojure.js")
+                "/resources/public/codemirror/clojure.js"
+                page-js)
     [:title "Try Clojure"]]
    [:body
     [:div#wrapper.container

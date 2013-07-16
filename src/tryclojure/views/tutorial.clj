@@ -29,4 +29,4 @@
 
 
 (defpage "/tutorial" []
-  (root-html tutorial-main))
+  (root-html tutorial-main "/resources/public/javascript/tutorial.js"))

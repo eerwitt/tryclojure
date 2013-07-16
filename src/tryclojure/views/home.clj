@@ -32,4 +32,4 @@
     ]])
 
 (defpage "/" []
-  (root-html main-html))
+  (root-html main-html "/resources/public/javascript/main.js"))
