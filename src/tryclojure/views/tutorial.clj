@@ -15,39 +15,18 @@
 (defpartial tutorial-main []
   [:div.row-fluid
     (tutorial-nav)
-    [:div.span8
+    [:div.span9
       [:h2 "Tutorials"]
-      [:p "These tutorials are designed to help you get started using Clojure, they are primarily based on the clojure-kloans project as a good starting point"]]])
-
-(defpartial tutorial-html [& {:keys [interactive-tutorial-html] :or {interactive-tutorial-html nil}}]
-  [:div.row-fluid (tutorial-nav)]
-  (interactive-tutorial-html)
-)
-
-(defpartial tutorial1-html []
+      [:p "These tutorials are designed to help you get started using Clojure."]]]
   [:div.row-fluid
-    [:div.span12.container
-      [:h2 "Basic Arithemetic"]
-      [:p "Clojure uses a prefix notation which might be a little difficult at first for those who are used to using infix notation. Let's look at an example."]]]
-  [:div.row-fluid
-    [:div.span4
-      [:p "Here the first element in the expresion is an addition sign, this takes up the control location of the list. The other two parameters are arguments to the addition operator"]]
     [:div.span4
       [:div.code_container
         [:textarea.code {:data-result "#tutorial1-example1" :data-expected "3"} "(+ 1 2)"]]]
     [:div.span4.result_container
-      [:pre#tutorial1-example1]]]
-  [:div.row-fluid
-    [:div.span4
-      [:p "Most operators work in a similar fashion, this example is broken. Try to see if you can fix it."]]
-    [:div.span4
-      [:div.code_container
-        [:textarea.code {:data-result "#tutorial1-example2" :data-expected "2"} "(10 / 5)"]]]
-    [:div.span4.result_container
-      [:pre#tutorial1-example2]]])
+      [:pre#tutorial1-example1]]
+  ]
+)
+
 
 (defpage "/tutorial" []
   (root-html tutorial-main))
-
-(defpage "/tutorial1" []
-  (root-html #(tutorial-html :interactive-tutorial-html tutorial1-html)))
