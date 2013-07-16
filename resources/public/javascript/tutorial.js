@@ -21,7 +21,6 @@ $(document).ready(function() {
       }
     };
 
-    var tryClojure = new TryClojure(element, resultCallback, {"autoRun": true});
-
+    var tryClojure = new TryClojure(element, resultCallback, {"autoRun": true, "lineNumbers": false});
   });
 });
