@@ -16,8 +16,9 @@
 (defpartial about-html []
   [:h2 "About"]
   [:p
-	 "An introduction to Clojure, not a generic Clojure REPL. "
-	 "You won't be able to do everything in it that you could do in your local interpreter. "
+    "An introduction to Clojure, not a generic Clojure REPL. "
+    "You won't be able to do everything in it that you could do in your local interpreter. "
+    "For a good starting point, try out some " [:a {:href "/tutorial" :title "Tutorials"} "tutorials"] "."
   ]
   [:blockquote
     [:p "Clojure devs are liberals that want their programs to work."]
@@ -72,9 +73,10 @@
 			]
      [:div#content.row-fluid
       [:div#header.span12
-       [:h1
-        [:span.logo-try "Try"] " "
-        [:span.logo-clojure "Clo" [:em "j"] "ure"]]]]
+        [:a.no_hover {:href "/" :title "Try Clojure"}
+          [:h1
+            [:span.logo-try "Try"] " "
+            [:span.logo-clojure "Clo" [:em "j"] "ure"]]]]]
      (content-html)
 
      (footer)

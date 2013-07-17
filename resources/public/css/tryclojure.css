@@ -55,3 +55,7 @@ body {
 .running {
   /*color: #51a351 !important;*/
 }
+
+.no_hover:hover {
+  text-decoration: none !important;
+}

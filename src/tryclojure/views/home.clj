@@ -14,10 +14,8 @@
   (format \"Hello world! By %s.\" name))"]]
     ]
     [:div.result_container.container.span6
-      [:pre 
-        "=> "
-        [:span#result]
-      ]]]
+      [:pre "=> " [:span#result]]
+      [:p "Try the " [:a {:href "/tutorial" :title "Tutorials"} "tutorials"] " to gain experience using Clojure."]]]
   [:div.row-fluid
     [:div.span6
       [:div.btn-group.pull-right
