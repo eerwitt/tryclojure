@@ -20,13 +20,7 @@
       [:li [:a {:href "#tutorial_10" :title "Tutorial 10 - Welcome to the Party!"} "Tutorial 10 - Welcome to the Party!"]]
     ]])
 
-(defpartial tutorial-main []
-  [:div.row-fluid
-    (tutorial-nav)
-    [:div.span9
-      [:h2 "Tutorials"]
-      [:p "These tutorials are designed to help you get started using Clojure."]]]
-
+(defpartial tutorial-1 []
   [:div#tutorial_1.row-fluid
     [:div.span4
       [:h4 "Tutorial 1 - First Steps"]
@@ -41,9 +35,9 @@
         [:textarea.code {:data-result "#tutorial1-example1" :data-expected "3"} "(+ 1 4)"]]]
     [:div.span4.result_container
       [:pre#tutorial1-example1]
-      [:p "That was a strange way to add numbers, wasn't it?"]]
-  ]
+      [:p "That was a strange way to add numbers, wasn't it?"]]])
 
+(defpartial tutorial-2 []
   [:div#tutorial_2.row-fluid
     [:div.span4
       [:h4 "Tutorial 2 - Lists (LISPs)"]
@@ -54,10 +48,32 @@
       [:div.code_container
         [:textarea.code {:data-result "#tutorial2-example1" :data-expected "2"} "(/ 15 5)"]]]
     [:div.span4.result_container
-      [:pre#tutorial2-example1]]
-  ]
-)
+      [:pre#tutorial2-example1]]])
+
+(defpartial tutorial-3 []
+  [:div#tutorial_3.row-fluid
+    [:div.span4
+      [:h4 "Tutorial 3 - Type Coercion"]
+      [:p "" ] ]
+    [:div.span4
+      [:p "Try"]
+      [:div.code_container
+        [:textarea.code {:data-result "#tutorial3-example1" :data-expected "2"} "(/ 15 5)"]]]
+    [:div.span4.result_container
+      [:pre#tutorial3-example1]]])
+
+(defpartial tutorial-main []
+  [:div.row-fluid
+    (tutorial-nav)
+    [:div.span9
+      [:h2 "Tutorials"]
+      [:p "These tutorials are designed to help you get started using Clojure."]]]
+
+  (tutorial-1)
+  (tutorial-2)
+  (tutorial-3))
 
 
 (defpage "/tutorial" []
   (root-html tutorial-main "/resources/public/javascript/tutorial.js"))
+
